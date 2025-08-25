@@ -50,7 +50,7 @@
                                 <input type="hidden" name="pretag" id="pretag" >
                                 <label id="prenum" style="color:white;" class="form-check-label small mb-0"></label>
                             </div>
-                            <input type="text"  name="enroll_number" class="form-control" id="enrollmentNumber"
+                            <input type="number"  name="enroll_number" class="form-control" id="enrollmentNumber"
                                    placeholder="Enter Number" value="{{ old('enroll_number',$num) }}"
                                    readonly required>
                             <div class="input-group-text bg-light">
