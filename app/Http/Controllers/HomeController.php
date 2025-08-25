@@ -18,7 +18,7 @@ class HomeController extends Controller
         $mode = Mode::where('status','active')->get();
         if($num !=null)
         {
-            $num = $num->enroll_number+1;
+            $num = (int)$num->enroll_number+1;
         }else{
            $num = date('msid')*500;
         }
