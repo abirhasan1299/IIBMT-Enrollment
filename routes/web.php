@@ -51,7 +51,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('add-course/',[SchoolCourseController::class,'AddCourse'])->name('add.courses');Route::post('store-courses/',[SchoolCourseController::class,'Coursestore'])->name('store.courses');
 });
 //--------------------------------------PUBLIC ROUTES-----------------------------------
-
+Route::get('qrcode/{id}', [PublicController::class, 'qrcode'])->name('public.qrcode');
 Route::get('/', [PublicController::class, 'Home'])->name('enrollment');
 Route::post('/verify-enrollment', [PublicController::class, 'CheckEnrollment'])->name('enrollment-verify');
 

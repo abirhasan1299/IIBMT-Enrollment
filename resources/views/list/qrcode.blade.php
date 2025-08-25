@@ -82,30 +82,51 @@
         .status .failed { background: linear-gradient(135deg,#dc2626,#ef4444); }
         .status .pending { background: linear-gradient(135deg,#eab308,#fde047); color:#111; }
         .status .discontinued { background: linear-gradient(135deg,#6b7280,#9ca3af); }
-        .qr-box {
-            text-align: right;
-            padding: 15px 30px 25px;
-            border-top: 1px solid #eee;
+
+        /* ✅ Popup Styles */
+        .popup {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
             display: flex;
             justify-content: center;
+            align-items: center;
+            z-index: 1000;
         }
-        .qr-box img {
-            width: 90px;
-            height: 90px;
+        .popup-content {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px 40px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            position: relative;
+            animation: fadeIn 0.5s ease-in-out;
         }
-        .qr-box p {
-            font-size: 12px;
+        .popup-content .tick {
+            font-size: 60px;
+            color: #16a34a;
+        }
+        .popup-content h3 {
+            margin: 15px 0 0;
+            font-size: 22px;
+            color: #16a34a;
+            font-weight: bold;
+        }
+        .popup-content .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            font-weight: bold;
             color: #666;
-            margin: 5px 0 0;
+            cursor: pointer;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
     </style>
-    <script>
-        function updateQRCode() {
-            const qrImg = document.getElementById("qrCode");
-            qrImg.src = "https://api.qrserver.com/v1/create-qr-code/?size=90x90&data={{ url('/qrcode') }}/{{ bin2hex($data->enroll_number) }}";
-        }
-        window.onload = updateQRCode;
-    </script>
 </head>
 <body>
 
@@ -113,7 +134,7 @@
     <div class="card-header">
         <img src="{{ asset('storage/app/public/'.$data->img_name) }}" alt="Student Photo">
         <h2>{{ $data->name }}</h2>
-        <p> <span id="enrollNo" style="font-weight: bolder;">{{ $data->pretag }}{{ $data->enroll_number }}</span></p>
+        <p><span id="enrollNo" style="font-weight: bolder;">{{ $data->pretag }}{{ $data->enroll_number }}</span></p>
     </div>
     <div class="card-body">
         <div class="detail"><label>Father's Name:</label> <span>{{ $data->father_name }}</span></div>
@@ -125,28 +146,38 @@
         <div class="detail"><label>Session:</label> <span>{{ $data->sessions->session }}</span></div>
 
         <div class="status">
-        <span class="
-          @switch($data->status)
-              @case('COMPLETED') completed @break
-              @case('IN PROGRESS') in-progress @break
-              @case('RE-APPEAR / BACKLOG') backlog @break
-              @case('FAILED') failed @break
-              @case('RESULT PENDING') pending @break
-              @case('DISCONTINUED') discontinued @break
-              @default discontinued
-          @endswitch
-        ">
-          {{ $data->status }}
-        </span>
-        </div>
-    </div>
-    <div class="qr-box">
-        <div>
-            <img id="qrCode" src="" alt="QR Code">
-            <p>Scan to Verify</p>
+      <span class="
+        @switch($data->status)
+            @case('COMPLETED') completed @break
+            @case('IN PROGRESS') in-progress @break
+            @case('RE-APPEAR / BACKLOG') backlog @break
+            @case('FAILED') failed @break
+            @case('RESULT PENDING') pending @break
+            @case('DISCONTINUED') discontinued @break
+            @default discontinued
+        @endswitch
+      ">
+        {{ $data->status }}
+      </span>
         </div>
     </div>
 </div>
+
+<!-- ✅ Verified Popup -->
+<div class="popup" id="verifiedPopup">
+    <div class="popup-content">
+        <span class="close-btn" onclick="document.getElementById('verifiedPopup').style.display='none'">&times;</span>
+        <div class="tick">&#10004;</div>
+        <h3>Verified</h3>
+    </div>
+</div>
+
+<script>
+    // Auto-show popup on load
+    window.onload = function() {
+        document.getElementById('verifiedPopup').style.display = 'flex';
+    }
+</script>
 
 </body>
 </html>

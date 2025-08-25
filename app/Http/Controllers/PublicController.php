@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class PublicController extends Controller
 {
+    public function qrcode($id)
+    {
+        $data = Student::where('enroll_number',hex2bin($id))->first();
+        return view('list.qrcode',compact('data'));
+    }
     public function Home()
     {
         return view('enroll-form');
