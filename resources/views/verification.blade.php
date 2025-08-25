@@ -116,13 +116,13 @@
         <p> <span id="enrollNo" style="font-weight: bolder;text-align:center;">{{ $data->pretag }}{{ $data->enroll_number }}</span></p>
     </div>
     <div class="card-body">
-        <div class="detail"><label>Father's Name:</label> <span>{{ $data->father_name }}</span></div>
-        <div class="detail"><label>Date of Birth:</label> <span>{{ date('d-m-Y', strtotime($data->dob)) }}</span></div>
-        <div class="detail"><label>Gender:</label> <span>{{ ucfirst($data->gender) }}</span></div>
-        <div class="detail"><label>Programme:</label> <span>{{ $data->courses->name }}</span></div>
-        <div class="detail"><label>Mode of Study:</label> <span>{{ $data->modes->name }}</span></div>
-        <div class="detail"><label>Campus:</label> <span>{{ $data->campus }}</span></div>
-        <div class="detail"><label>Session:</label> <span>{{ $data->sessions->session }}</span></div>
+        <div class="detail"><label>Father's Name:</label> <span>{{ strtoupper($data->father_name) }}</span></div>
+        <div class="detail"><label>Date of Birth:</label> <span>{{ strtoupper(date('d-m-Y', strtotime($data->dob))) }}</span></div>
+        <div class="detail"><label>Gender:</label> <span>{{ strtoupper($data->gender )}}</span></div>
+        <div class="detail"><label>Programme:</label> <span>{{ strtoupper($data->courses->name) }}</span></div>
+        <div class="detail"><label>Mode of Study:</label> <span>{{ strtoupper($data->modes->name) }}</span></div>
+        <div class="detail"><label>Campus:</label> <span>{{ strtoupper($data->campus) }}</span></div>
+        <div class="detail"><label>Session:</label> <span>{{ strtoupper($data->sessions->session) }}</span></div>
 
         <div class="status">
         <span class="
@@ -136,7 +136,7 @@
               @default discontinued
           @endswitch
         ">
-          {{ $data->status }}
+          {{strtoupper($data->status)}}
         </span>
         </div>
     </div>
