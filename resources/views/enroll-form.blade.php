@@ -123,15 +123,15 @@ box-shadow: var(--shadow);
           @endif
 
           <label for="enrollNumber">Enrollment / Register Number</label>
-          <input type="text" id="enrollNumber" name="enrollNumber" placeholder="e.g., DN1755001" required value="{{ old('enrollNumber') }}">
-            <div class="note">Format: Alphanumeric, 6-15 Characters</div>
+          <input type="text" id="enrollNumber" name="enrollNumber" placeholder="Enter Register Number (e.g. IIBMT2025001)" required value="{{ old('enrollNumber') }}">
+            <div class="note">Alphanumeric Only, e.g. IIBMT2025001</div>
           @error('enrollNumber')
             <div class="alert error">{{$message}}</div>
           @enderror
 
           <label for="dob">Date of Birth</label>
-          <input type="date" id="dob" name="dob" placeholder="DD-MM-YYYY" required value="{{ old('dob') }}">
-            <div class="note">Use Format: DD-MM-YY , eg. 07-09-2023</div>
+          <input type="text" id="dob" name="dob" placeholder="DD-MM-YYYY" required value="{{ old('dob') }}" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+            <div class="note">Use Format: DD-MM-YY , eg. 07-09-1998</div>
           @error('dob')
             <div class="alert error">{{$message}}</div>
           @enderror
@@ -145,9 +145,11 @@ box-shadow: var(--shadow);
 
           <div class="actions">
             <button type="submit" id="verifyBtn">Verify Enrollment</button>
+              <div class="note">All data entered is kept secure and confidential.</div>
           </div>
 
-          <div class="note">All data entered is kept secure and confidential.</div>
+
+          <div class="note">Have Trouble ? Call <b>044-28239004</b> or Email <b>enrollment@iibmt.com</b></div>
         </form>
 
         <!-- Loader -->

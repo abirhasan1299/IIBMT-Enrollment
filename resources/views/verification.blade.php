@@ -113,7 +113,7 @@
     <div class="card-header">
         <img src="{{ asset('storage/app/public/'.$data->img_name) }}" alt="Student Photo">
         <h2>{{ $data->name }}</h2>
-        <p> <span id="enrollNo" style="font-weight: bolder;">{{ $data->pretag }}{{ $data->enroll_number }}</span></p>
+        <p> <span id="enrollNo" style="font-weight: bolder;text-align:center;">{{ $data->pretag }}{{ $data->enroll_number }}</span></p>
     </div>
     <div class="card-body">
         <div class="detail"><label>Father's Name:</label> <span>{{ $data->father_name }}</span></div>
